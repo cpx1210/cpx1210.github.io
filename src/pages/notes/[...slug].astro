@@ -1,0 +1,37 @@
+---
+import { render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import {
+  getPrevNextPosts,
+  getPublishedEntries,
+  getReadingTimeText,
+  getRelatedPosts,
+  toPostSummary,
+  type NoteEntry,
+} from '../../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getPublishedEntries('notes');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props as { entry: NoteEntry };
+const { Content, headings } = await render(entry);
+const entries = await getPublishedEntries('notes');
+const { newer, older } = getPrevNextPosts(entries, entry.id);
+const relatedPosts = await getRelatedPosts(entry, 'notes');
+---
+
+<PostLayout
+  entry={entry}
+  headings={headings}
+  readingTime={getReadingTimeText(entry.body)}
+  relatedPosts={relatedPosts}
+  newerPost={newer ? toPostSummary(newer, 'notes') : undefined}
+  olderPost={older ? toPostSummary(older, 'notes') : undefined}
+>
+  <Content />
+</PostLayout>

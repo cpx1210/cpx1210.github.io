@@ -1,0 +1,28 @@
+---
+import PostCard from '../../components/post/PostCard.astro';
+import { NOTE_CATEGORY_META } from '../../consts';
+import { getPublishedEntries, toPostSummary } from '../../lib/content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const notes = (await getPublishedEntries('notes')).map((entry) => toPostSummary(entry, 'notes'));
+---
+
+<PageLayout
+  title="Notes"
+  description="Long-term study notes for web, pwn, crypto, reverse, forensics, tools, and everything in between."
+>
+  <section class="category-grid category-grid--dense">
+    {Object.entries(NOTE_CATEGORY_META).map(([slug, meta]) => (
+      <a class="category-panel" href={`/categories/${slug}/`}>
+        <strong>{meta.label}</strong>
+        <p>{meta.description}</p>
+      </a>
+    ))}
+  </section>
+
+  <section class="section-block">
+    <div class="post-grid">
+      {notes.map((post) => <PostCard post={post} />)}
+    </div>
+  </section>
+</PageLayout>

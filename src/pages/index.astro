@@ -1,0 +1,107 @@
+---
+import Container from '../components/layout/Container.astro';
+import PostCard from '../components/post/PostCard.astro';
+import { NOTE_CATEGORY_META } from '../consts';
+import { getContestGroups, getLatestPosts, getTaxonomyBuckets } from '../lib/content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const [latestPosts, tagBuckets, contestGroups] = await Promise.all([
+  getLatestPosts(6),
+  getTaxonomyBuckets('tags'),
+  getContestGroups(),
+]);
+
+const stats = [
+  { label: 'Latest posts', value: latestPosts.length },
+  { label: 'Tracked tags', value: tagBuckets.length },
+  { label: 'Contest events', value: contestGroups.length },
+];
+---
+
+<BaseLayout>
+  <Container class="home-shell">
+    <section class="home-hero">
+      <div class="hero-copy">
+        <span class="page-hero__eyebrow">CTF Knowledge Base</span>
+        <h1>Writeups, study notes, and post-mortems that stay usable over time.</h1>
+        <p>
+          This blog is designed as a personal operating manual for CTF growth: event reviews, category
+          notes, payload patterns, tooling records, and the small lessons that are easy to forget.
+        </p>
+        <div class="hero-actions">
+          <a class="button button--primary" href="/blog/">Explore the archive</a>
+          <a class="button" href="/search/">Search notes</a>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="terminal-card">
+          <span class="terminal-card__title">focus.txt</span>
+          <pre><code>topics/
+  web/
+  pwn/
+  crypto/
+  reverse/
+  misc/
+workflow/
+  retrospectives/
+  tooling/
+  pitfalls/
+</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      {stats.map((item) => (
+        <article class="stat-card">
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
+        </article>
+      ))}
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <span class="section-heading__eyebrow">Recent Updates</span>
+        <h2>Latest writing</h2>
+      </div>
+      <div class="post-grid">
+        {latestPosts.map((post) => <PostCard post={post} />)}
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <span class="section-heading__eyebrow">Direction Map</span>
+        <h2>Topic areas</h2>
+      </div>
+      <div class="category-grid">
+        {Object.entries(NOTE_CATEGORY_META).map(([slug, meta]) => (
+          <a class="category-panel" href={`/categories/${slug}/`}>
+            <strong>{meta.label}</strong>
+            <p>{meta.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <span class="section-heading__eyebrow">Contest Stream</span>
+        <h2>Recent events</h2>
+      </div>
+      <div class="event-grid">
+        {contestGroups.slice(0, 3).map((group) => (
+          <article class="event-card">
+            <strong>{group.contestName}</strong>
+            <p>
+              {group.items.length} posts · {group.teamName ?? 'team pending'} · {group.rank ?? 'rank pending'}
+            </p>
+            <a href={group.items[0]?.url}>Open event notes</a>
+          </article>
+        ))}
+      </div>
+    </section>
+  </Container>
+</BaseLayout>

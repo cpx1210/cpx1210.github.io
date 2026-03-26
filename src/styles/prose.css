@@ -1,0 +1,65 @@
+.prose-shell {
+  color: var(--text-primary);
+}
+
+.prose-shell > :first-child {
+  margin-top: 0;
+}
+
+.prose-shell h2,
+.prose-shell h3,
+.prose-shell h4 {
+  scroll-margin-top: 6rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.prose-shell h2 {
+  margin-top: 2.6rem;
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
+}
+
+.prose-shell h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.45rem;
+}
+
+.prose-shell p,
+.prose-shell li {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+}
+
+.prose-shell a {
+  color: var(--accent);
+}
+
+.prose-shell blockquote {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-soft);
+  border-radius: 0 14px 14px 0;
+}
+
+.prose-shell table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.prose-shell th,
+.prose-shell td {
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.prose-shell hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}

@@ -1,0 +1,25 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+const { headings = [] } = Astro.props as { headings: Heading[] };
+const visibleHeadings = headings.filter((heading) => heading.depth <= 3);
+---
+
+{
+  visibleHeadings.length > 0 && (
+    <aside class="post-toc">
+      <h2>On this page</h2>
+      <ul>
+        {visibleHeadings.map((heading) => (
+          <li class:list={[`depth-${heading.depth}`]}>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}

@@ -1,0 +1,76 @@
+---
+import type { AnyEntry } from '../../lib/content';
+import { CHALLENGE_TYPE_META } from '../../consts';
+import { formatDate } from '../../lib/utils';
+import CategoryBadge from '../ui/CategoryBadge.astro';
+import TagChip from '../ui/TagChip.astro';
+
+interface Props {
+  entry: AnyEntry;
+  readingTime: string;
+}
+
+const { entry, readingTime } = Astro.props as Props;
+const isContest = entry.collection === 'contests';
+---
+
+<section class="post-meta">
+  <div class="post-meta__grid">
+    <div>
+      <span class="post-meta__label">Published</span>
+      <strong>{formatDate(entry.data.pubDate)}</strong>
+    </div>
+    <div>
+      <span class="post-meta__label">Updated</span>
+      <strong>{entry.data.updatedDate ? formatDate(entry.data.updatedDate) : 'N/A'}</strong>
+    </div>
+    <div>
+      <span class="post-meta__label">Category</span>
+      <CategoryBadge category={entry.data.category} />
+    </div>
+    <div>
+      <span class="post-meta__label">Read</span>
+      <strong>{readingTime}</strong>
+    </div>
+    {entry.data.series && (
+      <div>
+        <span class="post-meta__label">Series</span>
+        <strong>{entry.data.series}</strong>
+      </div>
+    )}
+    {entry.data.difficulty && (
+      <div>
+        <span class="post-meta__label">Difficulty</span>
+        <strong>{entry.data.difficulty}</strong>
+      </div>
+    )}
+    {isContest && (
+      <>
+        <div>
+          <span class="post-meta__label">Contest</span>
+          <strong>{entry.data.contestName}</strong>
+        </div>
+        <div>
+          <span class="post-meta__label">Contest Date</span>
+          <strong>{formatDate(entry.data.contestDate)}</strong>
+        </div>
+        <div>
+          <span class="post-meta__label">Team</span>
+          <strong>{entry.data.teamName ?? 'Solo / not recorded'}</strong>
+        </div>
+        <div>
+          <span class="post-meta__label">Rank</span>
+          <strong>{entry.data.rank ?? 'Not recorded'}</strong>
+        </div>
+        <div>
+          <span class="post-meta__label">Challenge Type</span>
+          <strong>{CHALLENGE_TYPE_META[entry.data.challengeType]}</strong>
+        </div>
+      </>
+    )}
+  </div>
+
+  <div class="post-meta__tags">
+    {entry.data.tags.map((tag) => <TagChip label={tag} />)}
+  </div>
+</section>

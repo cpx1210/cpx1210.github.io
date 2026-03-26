@@ -1,0 +1,8 @@
+---
+import { toSlug } from '../../lib/utils';
+
+const { label, href } = Astro.props;
+const resolvedHref = href ?? `/tags/${toSlug(label)}/`;
+---
+
+<a class="tag-chip" href={resolvedHref}>#{label}</a>

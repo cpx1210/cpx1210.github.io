@@ -1,0 +1,33 @@
+---
+import Container from './Container.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { NAV_LINKS } from '../../consts';
+
+const { currentPath = '/' } = Astro.props;
+---
+
+<header class="site-header">
+  <Container class="site-header__inner">
+    <a class="site-brand" href="/">
+      <span class="site-brand__mark">></span>
+      <span class="site-brand__name">cpx1210</span>
+    </a>
+
+    <nav aria-label="Main navigation" class="site-nav">
+      {NAV_LINKS.map((link) => {
+        const active =
+          link.href === '/'
+            ? currentPath === '/'
+            : currentPath.startsWith(link.href);
+
+        return (
+          <a class:list={['site-nav__link', { 'is-active': active }]} href={link.href}>
+            {link.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <ThemeToggle />
+  </Container>
+</header>

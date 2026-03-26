@@ -1,0 +1,16 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="404"
+  description="The requested page was not found. The note may have moved, been renamed, or not been published yet."
+>
+  <section class="content-panel content-panel--center">
+    <p class="empty-state">The page you requested is missing from the current build.</p>
+    <div class="hero-actions">
+      <a class="button button--primary" href="/">Back home</a>
+      <a class="button" href="/search/">Search notes</a>
+    </div>
+  </section>
+</PageLayout>

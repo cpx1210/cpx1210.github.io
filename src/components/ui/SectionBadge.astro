@@ -1,0 +1,6 @@
+---
+const { section } = Astro.props;
+const label = section === 'contests' ? 'Contest' : 'Notes';
+---
+
+<span class="section-badge">{label}</span>

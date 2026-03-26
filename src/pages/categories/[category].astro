@@ -1,0 +1,23 @@
+---
+import PostCard from '../../components/post/PostCard.astro';
+import { getCategoryLabel, getPostsByCategory, getTaxonomyBuckets } from '../../lib/content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+export async function getStaticPaths() {
+  const categories = await getTaxonomyBuckets('category');
+  return categories.map((category) => ({
+    params: { category: category.slug },
+    props: { categoryLabel: getCategoryLabel(category.label), count: category.count },
+  }));
+}
+
+const { categoryLabel, count } = Astro.props;
+const posts = await getPostsByCategory(Astro.params.category ?? '');
+---
+
+<PageLayout title={`Category: ${categoryLabel}`} description={`${count} posts in ${categoryLabel}.`}>
+  <p class="page-intro">{count} matching posts.</p>
+  <div class="post-grid">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+</PageLayout>

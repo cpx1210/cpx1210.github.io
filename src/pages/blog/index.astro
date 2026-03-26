@@ -1,0 +1,16 @@
+---
+import PostCard from '../../components/post/PostCard.astro';
+import { getAllPublishedPosts } from '../../lib/content';
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const posts = await getAllPublishedPosts();
+---
+
+<PageLayout
+  title="Blog"
+  description="All published notes and contest writeups, sorted by the latest publication date."
+>
+  <div class="post-grid">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+</PageLayout>

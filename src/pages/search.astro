@@ -1,0 +1,101 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Search"
+  description="Search across titles, descriptions, tags, categories, and article content without adding a server."
+>
+  <section class="search-panel">
+    <label class="search-box" for="search-input">
+      <span>Search query</span>
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Try: ssti, glibc, rsa, pwntools, heap..."
+        autocomplete="off"
+      />
+    </label>
+
+    <p class="search-hint">Search covers title, description, tags, category, and a trimmed content index.</p>
+
+    <div class="search-results" id="search-results"></div>
+  </section>
+
+  <script is:inline>
+    const input = document.getElementById('search-input');
+    const resultsNode = document.getElementById('search-results');
+    const queryFromUrl = new URL(window.location.href).searchParams.get('q') ?? '';
+    let index = [];
+
+    const escapeHtml = (value) =>
+      value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+
+    const scoreItem = (item, query) => {
+      if (!query) return 0;
+      const q = query.toLowerCase();
+      let score = 0;
+      if (item.title.toLowerCase().includes(q)) score += 50;
+      if (item.description.toLowerCase().includes(q)) score += 25;
+      if (item.category.toLowerCase().includes(q)) score += 15;
+      if (item.tags.some((tag) => tag.toLowerCase().includes(q))) score += 25;
+      if (item.content.toLowerCase().includes(q)) score += 10;
+      return score;
+    };
+
+    const renderResults = (query) => {
+      if (!resultsNode) return;
+      if (!query) {
+        resultsNode.innerHTML = '<p class="empty-state">Start typing to search the knowledge base.</p>';
+        return;
+      }
+
+      const items = index
+        .map((item) => ({ item, score: scoreItem(item, query) }))
+        .filter(({ score }) => score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 20);
+
+      if (items.length === 0) {
+        resultsNode.innerHTML = '<p class="empty-state">No matches found. Try a tag, challenge type, or keyword from a writeup.</p>';
+        return;
+      }
+
+      resultsNode.innerHTML = items
+        .map(
+          ({ item }) => `
+            <article class="search-result-card">
+              <a href="${item.url}">
+                <strong>${escapeHtml(item.title)}</strong>
+                <span>${escapeHtml(item.description)}</span>
+                <small>${escapeHtml(item.section)} · ${escapeHtml(item.category)} · ${escapeHtml(item.tags.join(', '))}</small>
+              </a>
+            </article>
+          `,
+        )
+        .join('');
+    };
+
+    const boot = async () => {
+      const response = await fetch('/search-data.json');
+      index = await response.json();
+      if (input instanceof HTMLInputElement) {
+        input.value = queryFromUrl;
+        renderResults(input.value.trim());
+        input.addEventListener('input', () => renderResults(input.value.trim()));
+      }
+    };
+
+    boot().catch(() => {
+      if (resultsNode) {
+        resultsNode.innerHTML =
+          '<p class="empty-state">Search index failed to load. Build the site or refresh the page and try again.</p>';
+      }
+    });
+  </script>
+</PageLayout>

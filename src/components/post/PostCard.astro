@@ -1,0 +1,37 @@
+---
+import type { PostSummary } from '../../lib/content';
+import { formatDate } from '../../lib/utils';
+import CategoryBadge from '../ui/CategoryBadge.astro';
+import SectionBadge from '../ui/SectionBadge.astro';
+import TagChip from '../ui/TagChip.astro';
+
+interface Props {
+  post: PostSummary;
+  compact?: boolean;
+}
+
+const { post, compact = false } = Astro.props as Props;
+---
+
+<article class:list={['post-card', { 'post-card--compact': compact }]}>
+  <div class="post-card__topline">
+    <SectionBadge section={post.section} />
+    <CategoryBadge category={post.category} />
+    {post.difficulty && <span class="meta-pill">{post.difficulty}</span>}
+  </div>
+
+  <h3 class="post-card__title">
+    <a href={post.url}>{post.title}</a>
+  </h3>
+
+  <p class="post-card__description">{post.description}</p>
+
+  <div class="post-card__meta">
+    <span>{formatDate(post.pubDate)}</span>
+    <span>{post.section === 'contests' ? 'Writeup stream' : 'Study note'}</span>
+  </div>
+
+  <div class="post-card__tags">
+    {post.tags.slice(0, compact ? 3 : 5).map((tag) => <TagChip label={tag} />)}
+  </div>
+</article>

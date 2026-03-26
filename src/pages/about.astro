@@ -1,0 +1,31 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="About"
+  description="About this site, its writing goals, and the way the notebook is organized for long-term CTF learning."
+>
+  <section class="content-panel prose-shell">
+    <p>
+      This blog is built as a personal knowledge base for CTF preparation and retrospective work. The goal is
+      not just to publish isolated writeups, but to preserve reusable context: attack paths, debugging habits,
+      tooling choices, and the failure cases that taught the most.
+    </p>
+
+    <h2>What lives here</h2>
+    <ul>
+      <li>Competition retrospectives with event-level notes and rank context.</li>
+      <li>Category-specific learning notes for web, pwn, crypto, reverse, misc, and forensics.</li>
+      <li>Tooling records, shell snippets, and workflow templates that save time in future challenges.</li>
+      <li>Post-mortems on mistakes, dead ends, and patches to personal methodology.</li>
+    </ul>
+
+    <h2>How to use the site</h2>
+    <p>
+      If you want a broad view, start from <a href="/blog/">Blog</a>. If you are looking for a topic, use
+      <a href="/notes/"> Notes</a> or jump through the tag and category pages. If you want the fastest route,
+      open <a href="/search/">Search</a>.
+    </p>
+  </section>
+</PageLayout>

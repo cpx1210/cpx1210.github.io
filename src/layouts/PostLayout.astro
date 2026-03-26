@@ -1,0 +1,52 @@
+---
+import type { AnyEntry, PostSummary } from '../lib/content';
+import Container from '../components/layout/Container.astro';
+import PostMeta from '../components/post/PostMeta.astro';
+import PostToc from '../components/post/PostToc.astro';
+import PrevNextNav from '../components/post/PrevNextNav.astro';
+import RelatedPosts from '../components/post/RelatedPosts.astro';
+import BaseLayout from './BaseLayout.astro';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  entry: AnyEntry;
+  readingTime: string;
+  headings: Heading[];
+  relatedPosts: PostSummary[];
+  newerPost?: PostSummary;
+  olderPost?: PostSummary;
+}
+
+const { entry, readingTime, headings, relatedPosts, newerPost, olderPost } = Astro.props as Props;
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description} pageType="article">
+  <Container class="post-shell">
+    <header class="post-hero">
+      <span class="page-hero__eyebrow">
+        {entry.collection === 'contests' ? 'Contest Retrospective' : 'Study Note'}
+      </span>
+      <h1>{entry.data.title}</h1>
+      <p>{entry.data.description}</p>
+    </header>
+
+    <PostMeta entry={entry} readingTime={readingTime} />
+
+    <div class="post-layout">
+      <article class="post-article">
+        <div class="prose-shell">
+          <slot />
+        </div>
+      </article>
+      <PostToc headings={headings} />
+    </div>
+
+    <PrevNextNav newer={newerPost} older={olderPost} />
+    <RelatedPosts posts={relatedPosts} />
+  </Container>
+</BaseLayout>

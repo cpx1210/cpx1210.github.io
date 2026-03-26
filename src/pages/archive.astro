@@ -1,0 +1,28 @@
+---
+import { formatDate } from '../lib/utils';
+import { getArchiveGroups } from '../lib/content';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const groups = await getArchiveGroups();
+---
+
+<PageLayout
+  title="Archive"
+  description="Browse every post by publication year. Useful when you want the full timeline instead of topic-first navigation."
+>
+  <div class="stack">
+    {groups.map((group) => (
+      <section class="archive-group">
+        <h2>{group.year}</h2>
+        <div class="archive-list">
+          {group.posts.map((post) => (
+            <a class="archive-list__item" href={post.url}>
+              <span>{formatDate(post.pubDate)}</span>
+              <strong>{post.title}</strong>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</PageLayout>

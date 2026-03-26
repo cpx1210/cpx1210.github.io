@@ -1,0 +1,9 @@
+---
+import { getCategoryLabel } from '../../lib/content';
+import { toSlug } from '../../lib/utils';
+
+const { category, href } = Astro.props;
+const resolvedHref = href ?? `/categories/${toSlug(category)}/`;
+---
+
+<a class="category-badge" href={resolvedHref}>{getCategoryLabel(category)}</a>

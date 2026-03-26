@@ -1,0 +1,34 @@
+---
+import type { PostSummary } from '../../lib/content';
+
+interface Props {
+  newer?: PostSummary;
+  older?: PostSummary;
+}
+
+const { newer, older } = Astro.props as Props;
+---
+
+{
+  (newer || older) && (
+    <nav class="prev-next-nav" aria-label="Post navigation">
+      {newer ? (
+        <a class="prev-next-nav__card" href={newer.url}>
+          <span class="prev-next-nav__eyebrow">Newer</span>
+          <strong>{newer.title}</strong>
+        </a>
+      ) : (
+        <div />
+      )}
+
+      {older ? (
+        <a class="prev-next-nav__card prev-next-nav__card--align-end" href={older.url}>
+          <span class="prev-next-nav__eyebrow">Older</span>
+          <strong>{older.title}</strong>
+        </a>
+      ) : (
+        <div />
+      )}
+    </nav>
+  )
+}
