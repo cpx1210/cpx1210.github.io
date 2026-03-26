@@ -122,7 +122,8 @@ main {
 .post-toc,
 .prev-next-nav__card,
 .post-list-item,
-.empty-panel {
+.empty-panel,
+.brand-hero {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow-soft);
@@ -156,7 +157,7 @@ main {
   padding-block: 2.5rem 4rem;
 }
 
-.home-hero,
+.brand-hero,
 .post-layout,
 .stats-grid,
 .post-grid,
@@ -170,12 +171,6 @@ main {
 .post-list-item {
   display: grid;
   gap: 1rem;
-}
-
-.home-hero {
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
-  align-items: stretch;
-  gap: 1.5rem;
 }
 
 .page-hero,
@@ -201,7 +196,7 @@ main {
   color: var(--text-tertiary);
 }
 
-.home-hero h1,
+.brand-hero h1,
 .page-hero h1,
 .post-hero h1 {
   font-size: clamp(2.4rem, 5vw, 4.6rem);
@@ -210,12 +205,54 @@ main {
   margin: 0.5rem 0 1rem;
 }
 
-.hero-copy p,
 .page-hero p,
 .post-hero p {
   color: var(--text-secondary);
   font-size: 1.05rem;
   max-width: 66ch;
+}
+
+.brand-hero {
+  justify-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  margin-bottom: 2rem;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top, rgba(125, 198, 255, 0.18), transparent 42%),
+    linear-gradient(180deg, rgba(11, 23, 41, 0.86) 0%, rgba(8, 16, 30, 0.72) 100%);
+}
+
+.brand-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.brand-hero__eyebrow::before,
+.brand-hero__eyebrow::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--border);
+}
+
+.brand-hero h1 {
+  margin: 0.8rem 0 0;
+  font-size: clamp(3.4rem, 10vw, 7.2rem);
+  letter-spacing: -0.08em;
+}
+
+.brand-hero__line {
+  width: min(420px, 62vw);
+  height: 1px;
+  margin: 0.5rem 0 1rem;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
 }
 
 .terminal-card,
@@ -233,7 +270,8 @@ main {
 .contest-link,
 .search-result-card,
 .post-list-item,
-.empty-panel {
+.empty-panel,
+.brand-hero {
   border-radius: 24px;
 }
 
@@ -459,7 +497,6 @@ main {
 }
 
 @media (max-width: 960px) {
-  .home-hero,
   .post-layout,
   .stats-grid,
   .category-grid,
@@ -494,7 +531,6 @@ main {
     width: min(100% - 1rem, 1120px);
   }
 
-  .home-hero,
   .stats-grid,
   .category-grid,
   .event-grid,
@@ -514,5 +550,9 @@ main {
   .home-shell,
   .post-shell {
     padding-block: 1.5rem 3rem;
+  }
+
+  .brand-hero {
+    padding: 3rem 1rem 2.5rem;
   }
 }
