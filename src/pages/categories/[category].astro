@@ -1,5 +1,5 @@
 ---
-import PostCard from '../../components/post/PostCard.astro';
+import PostListItem from '../../components/post/PostListItem.astro';
 import { getCategoryLabel, getPostsByCategory, getTaxonomyBuckets } from '../../lib/content';
 import PageLayout from '../../layouts/PageLayout.astro';
 
@@ -17,7 +17,7 @@ const posts = await getPostsByCategory(Astro.params.category ?? '');
 
 <PageLayout title={`Category: ${categoryLabel}`} description={`${count} posts in ${categoryLabel}.`}>
   <p class="page-intro">{count} matching posts.</p>
-  <div class="post-grid">
-    {posts.map((post) => <PostCard post={post} />)}
+  <div class="post-list">
+    {posts.map((post) => <PostListItem post={post} />)}
   </div>
 </PageLayout>

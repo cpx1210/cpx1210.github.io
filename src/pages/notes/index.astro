@@ -1,5 +1,5 @@
 ---
-import PostCard from '../../components/post/PostCard.astro';
+import PostListItem from '../../components/post/PostListItem.astro';
 import { NOTE_CATEGORY_META } from '../../consts';
 import { getPublishedEntries, toPostSummary } from '../../lib/content';
 import PageLayout from '../../layouts/PageLayout.astro';
@@ -21,8 +21,14 @@ const notes = (await getPublishedEntries('notes')).map((entry) => toPostSummary(
   </section>
 
   <section class="section-block">
-    <div class="post-grid">
-      {notes.map((post) => <PostCard post={post} />)}
-    </div>
+    {notes.length > 0 ? (
+      <div class="post-list">
+        {notes.map((post) => <PostListItem post={post} />)}
+      </div>
+    ) : (
+      <div class="empty-panel">
+        <p class="empty-state">笔记区目前没有文章。后续新增到 `src/content/notes/` 的内容会自动出现在这里。</p>
+      </div>
+    )}
   </section>
 </PageLayout>

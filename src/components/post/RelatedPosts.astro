@@ -1,6 +1,6 @@
 ---
 import type { PostSummary } from '../../lib/content';
-import PostCard from './PostCard.astro';
+import PostListItem from './PostListItem.astro';
 
 const { posts = [] } = Astro.props as { posts: PostSummary[] };
 ---
@@ -12,8 +12,8 @@ const { posts = [] } = Astro.props as { posts: PostSummary[] };
         <span class="section-heading__eyebrow">Further Reading</span>
         <h2>Related posts</h2>
       </div>
-      <div class="post-grid">
-        {posts.map((post) => <PostCard post={post} compact />)}
+      <div class="post-list">
+        {posts.map((post) => <PostListItem post={post} />)}
       </div>
     </section>
   )

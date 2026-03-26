@@ -61,7 +61,10 @@ main {
 .post-card__meta,
 .post-card__tags,
 .post-meta__tags,
-.hero-actions {
+.hero-actions,
+.post-list-item__topline,
+.post-list-item__tags,
+.post-list-item__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -96,7 +99,8 @@ main {
 .archive-list__item:hover,
 .event-card:hover,
 .post-card:hover,
-.search-result-card:hover {
+.search-result-card:hover,
+.post-list-item:hover {
   background: var(--surface-soft);
   color: var(--text-primary);
 }
@@ -116,7 +120,9 @@ main {
 .terminal-card,
 .post-meta,
 .post-toc,
-.prev-next-nav__card {
+.prev-next-nav__card,
+.post-list-item,
+.empty-panel {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow-soft);
@@ -160,7 +166,8 @@ main {
 .archive-list__item,
 .prev-next-nav,
 .search-result-card a,
-.post-meta__grid {
+.post-meta__grid,
+.post-list-item {
   display: grid;
   gap: 1rem;
 }
@@ -224,7 +231,9 @@ main {
 .archive-list__item,
 .category-panel,
 .contest-link,
-.search-result-card {
+.search-result-card,
+.post-list-item,
+.empty-panel {
   border-radius: 24px;
 }
 
@@ -240,10 +249,17 @@ main {
 }
 
 .stats-grid,
-.post-grid,
 .category-grid,
 .event-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.post-list,
+.stack,
+.archive-list,
+.contest-group__items {
+  display: grid;
+  gap: 1rem;
 }
 
 .stat-card,
@@ -252,8 +268,38 @@ main {
 .post-card,
 .contest-group,
 .content-panel,
-.search-panel {
+.search-panel,
+.empty-panel {
   padding: 1.25rem;
+}
+
+.post-list-item {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  padding: 1.15rem 1.25rem;
+  transition: 180ms ease;
+}
+
+.post-list-item__meta {
+  flex-direction: column;
+  align-items: end;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+}
+
+.post-list-item__title {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.post-list-item__description,
+.post-card__description,
+.contest-link span,
+.event-card p,
+.search-hint,
+.page-intro {
+  color: var(--text-secondary);
 }
 
 .stat-card strong {
@@ -280,14 +326,6 @@ main {
   font-size: 1.35rem;
 }
 
-.post-card__description,
-.contest-link span,
-.event-card p,
-.search-hint,
-.page-intro {
-  color: var(--text-secondary);
-}
-
 .meta-pill,
 .tag-chip,
 .category-badge,
@@ -310,13 +348,6 @@ main {
 .tag-chip:hover,
 .category-badge:hover {
   color: var(--text-primary);
-}
-
-.stack,
-.archive-list,
-.contest-group__items {
-  display: grid;
-  gap: 1rem;
 }
 
 .contest-group__header {
@@ -431,7 +462,6 @@ main {
   .home-hero,
   .post-layout,
   .stats-grid,
-  .post-grid,
   .category-grid,
   .event-grid,
   .post-meta__grid {
@@ -444,13 +474,18 @@ main {
     align-items: start;
   }
 
-  .post-layout {
+  .post-layout,
+  .post-list-item {
     grid-template-columns: 1fr;
   }
 
   .post-toc {
     position: static;
     order: -1;
+  }
+
+  .post-list-item__meta {
+    align-items: start;
   }
 }
 
@@ -461,7 +496,6 @@ main {
 
   .home-hero,
   .stats-grid,
-  .post-grid,
   .category-grid,
   .event-grid,
   .post-meta__grid,

@@ -1,6 +1,6 @@
 ---
 import Container from '../components/layout/Container.astro';
-import PostCard from '../components/post/PostCard.astro';
+import PostListItem from '../components/post/PostListItem.astro';
 import { NOTE_CATEGORY_META } from '../consts';
 import { getContestGroups, getLatestPosts, getTaxonomyBuckets } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -66,9 +66,15 @@ workflow/
         <span class="section-heading__eyebrow">Recent Updates</span>
         <h2>Latest writing</h2>
       </div>
-      <div class="post-grid">
-        {latestPosts.map((post) => <PostCard post={post} />)}
-      </div>
+      {latestPosts.length > 0 ? (
+        <div class="post-list">
+          {latestPosts.map((post) => <PostListItem post={post} />)}
+        </div>
+      ) : (
+        <div class="empty-panel">
+          <p class="empty-state">还没有公开文章。后续把 `.md` 或 `.mdx` 放进 `src/content/notes` 或 `src/content/contests` 就会自动出现在这里。</p>
+        </div>
+      )}
     </section>
 
     <section class="section-block">
@@ -91,17 +97,23 @@ workflow/
         <span class="section-heading__eyebrow">Contest Stream</span>
         <h2>Recent events</h2>
       </div>
-      <div class="event-grid">
-        {contestGroups.slice(0, 3).map((group) => (
-          <article class="event-card">
-            <strong>{group.contestName}</strong>
-            <p>
-              {group.items.length} posts · {group.teamName ?? 'team pending'} · {group.rank ?? 'rank pending'}
-            </p>
-            <a href={group.items[0]?.url}>Open event notes</a>
-          </article>
-        ))}
-      </div>
+      {contestGroups.length > 0 ? (
+        <div class="event-grid">
+          {contestGroups.slice(0, 3).map((group) => (
+            <article class="event-card">
+              <strong>{group.contestName}</strong>
+              <p>
+                {group.items.length} posts · {group.teamName ?? 'team pending'} · {group.rank ?? 'rank pending'}
+              </p>
+              <a href={group.items[0]?.url}>Open event notes</a>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-panel">
+          <p class="empty-state">比赛复盘区现在是空的，等你发布第一篇赛事总结后这里会自动聚合。</p>
+        </div>
+      )}
     </section>
   </Container>
 </BaseLayout>

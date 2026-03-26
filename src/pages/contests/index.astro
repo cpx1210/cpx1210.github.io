@@ -10,28 +10,34 @@ const groups = await getContestGroups();
   title="Contests"
   description="Competition retrospectives, single-challenge writeups, rank notes, and team-oriented review logs."
 >
-  <div class="stack">
-    {groups.map((group) => (
-      <section class="contest-group">
-        <header class="contest-group__header">
-          <div>
-            <h2>{group.contestName}</h2>
-            <p>
-              {formatDate(group.contestDate)} · {group.teamName ?? 'team pending'} · {group.rank ?? 'rank pending'}
-            </p>
-          </div>
-          <span class="meta-pill">{group.items.length} posts</span>
-        </header>
+  {groups.length > 0 ? (
+    <div class="stack">
+      {groups.map((group) => (
+        <section class="contest-group">
+          <header class="contest-group__header">
+            <div>
+              <h2>{group.contestName}</h2>
+              <p>
+                {formatDate(group.contestDate)} · {group.teamName ?? 'team pending'} · {group.rank ?? 'rank pending'}
+              </p>
+            </div>
+            <span class="meta-pill">{group.items.length} posts</span>
+          </header>
 
-        <div class="contest-group__items">
-          {group.items.map((item) => (
-            <a class="contest-link" href={item.url}>
-              <strong>{item.title}</strong>
-              <span>{item.description}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    ))}
-  </div>
+          <div class="contest-group__items">
+            {group.items.map((item) => (
+              <a class="contest-link" href={item.url}>
+                <strong>{item.title}</strong>
+                <span>{item.description}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  ) : (
+    <div class="empty-panel">
+      <p class="empty-state">比赛复盘区还没有内容。以后把赛事总结或单题 writeup 放进 `src/content/contests/` 即可。</p>
+    </div>
+  )}
 </PageLayout>

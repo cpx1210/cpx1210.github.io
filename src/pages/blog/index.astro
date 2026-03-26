@@ -1,5 +1,5 @@
 ---
-import PostCard from '../../components/post/PostCard.astro';
+import PostListItem from '../../components/post/PostListItem.astro';
 import { getAllPublishedPosts } from '../../lib/content';
 import PageLayout from '../../layouts/PageLayout.astro';
 
@@ -10,7 +10,13 @@ const posts = await getAllPublishedPosts();
   title="Blog"
   description="All published notes and contest writeups, sorted by the latest publication date."
 >
-  <div class="post-grid">
-    {posts.map((post) => <PostCard post={post} />)}
-  </div>
+  {posts.length > 0 ? (
+    <div class="post-list">
+      {posts.map((post) => <PostListItem post={post} />)}
+    </div>
+  ) : (
+    <div class="empty-panel">
+      <p class="empty-state">博客目前还是空白状态。把新的 `.md` 或 `.mdx` 文件提交到内容目录后，这里会自动按时间列出来。</p>
+    </div>
+  )}
 </PageLayout>
