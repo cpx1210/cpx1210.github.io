@@ -17,7 +17,7 @@ const latestPosts = await getLatestPosts(6);
           <h2>Recent writing</h2>
         </div>
         {latestPosts.length > 0 ? (
-          <div class="post-list post-list--home">
+          <div class="post-list">
             {latestPosts.map((post) => <PostListItem post={post} />)}
           </div>
         ) : (
@@ -33,3 +33,4 @@ const latestPosts = await getLatestPosts(6);
     </section>
   </Container>
 </BaseLayout>
+
