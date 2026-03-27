@@ -18,6 +18,13 @@ export const ctfEvents: CtfEvent[] = [
     endDate: '2026-03-30T09:00:00+08:00',
     note: '北京时间',
   },
+  {
+    title: 'NCTF 2026',
+    startDate: '2026-04-04T09:00:00+08:00',
+    endDate: '2026-04-05T21:00:00+08:00',
+    url: 'https://nctf.x1ct34m.com/',
+    note: '北京时间',
+  },
   // Add new events here.
   // Example:
   // {
