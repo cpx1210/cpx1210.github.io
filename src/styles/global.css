@@ -167,7 +167,6 @@ main {
 
 .site-nav__link.is-active,
 .site-nav__link:hover,
-.theme-toggle:hover,
 .button:hover,
 .category-panel:hover,
 .contest-link:hover,
@@ -181,7 +180,6 @@ main {
   color: var(--text-primary);
 }
 
-.theme-toggle,
 .button,
 .category-panel,
 .contest-link,
@@ -207,7 +205,6 @@ main {
   box-shadow: var(--shadow-soft);
 }
 
-.theme-toggle,
 .button {
   display: inline-flex;
   align-items: center;
@@ -217,10 +214,6 @@ main {
   color: var(--text-primary);
   cursor: pointer;
   transition: 180ms ease;
-}
-
-.theme-toggle {
-  font: inherit;
 }
 
 .button--primary {
@@ -374,6 +367,7 @@ main {
 .brand-hero {
   border-radius: 24px;
 }
+
 .sidebar-card {
   position: sticky;
   top: 6rem;
@@ -644,6 +638,7 @@ main {
   background: color-mix(in srgb, var(--bg) 42%, transparent);
   backdrop-filter: blur(10px);
 }
+
 @media (max-width: 960px) {
   .home-content-grid,
   .post-layout,
@@ -717,6 +712,3 @@ main {
     align-items: start;
   }
 }
-
-
-
