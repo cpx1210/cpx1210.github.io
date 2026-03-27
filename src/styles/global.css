@@ -47,13 +47,6 @@ main {
 }
 
 .site-header__inner,
-.site-footer__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 0;
-}
 
 .site-brand,
 .site-nav,
@@ -313,7 +306,6 @@ main {
   padding-inline: 0.9rem;
 }
 
-.sidebar-card__hint,
 .ctf-calendar__date,
 .ctf-calendar__note,
 .ctf-calendar__platform,
@@ -326,10 +318,6 @@ main {
   color: var(--text-secondary);
 }
 
-.sidebar-card__hint {
-  margin: 0 0 1rem;
-  font-size: 0.92rem;
-}
 
 .ctf-calendar__list,
 .post-list,
@@ -564,10 +552,6 @@ main {
   border-top: 1px solid var(--border);
 }
 
-.site-footer__inner {
-  color: var(--text-secondary);
-  font-size: 0.94rem;
-}
 
 @media (max-width: 960px) {
   .home-content-grid,
@@ -580,11 +564,7 @@ main {
   }
 
   .site-header__inner,
-  .site-footer__inner {
-    flex-direction: column;
-    align-items: start;
-  }
-
+  
   .post-layout,
   .post-list-item {
     grid-template-columns: 1fr;
@@ -636,3 +616,4 @@ main {
     align-items: start;
   }
 }
+

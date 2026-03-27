@@ -1,5 +1,5 @@
 ---
-import { CTF_EVENTS_EDIT_URL, CTF_EVENTS_FILE_PATH, ctfEvents, type CtfEvent } from '../../data/ctf-events';
+import { CTF_EVENTS_EDIT_URL, ctfEvents, type CtfEvent } from '../../data/ctf-events';
 
 function formatEventDate(date: string) {
   return new Intl.DateTimeFormat('zh-CN', {
@@ -37,10 +37,6 @@ const sortedEvents = [...ctfEvents].sort(
     </a>
   </div>
 
-  <p class="sidebar-card__hint">
-    Click <code>Add Event</code> to edit <code>{CTF_EVENTS_FILE_PATH}</code> on GitHub.
-  </p>
-
   {sortedEvents.length > 0 ? (
     <div class="ctf-calendar__list">
       {sortedEvents.map((event) => (
@@ -63,7 +59,7 @@ const sortedEvents = [...ctfEvents].sort(
     </div>
   ) : (
     <div class="empty-panel">
-      <p class="empty-state">还没有记录比赛时间。点击右上角的 <code>Add Event</code> 就能在 GitHub 上直接维护。</p>
+      <p class="empty-state">还没有记录比赛时间。</p>
     </div>
   )}
 </aside>
