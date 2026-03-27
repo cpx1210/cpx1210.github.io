@@ -1,6 +1,5 @@
 ---
 import Container from './Container.astro';
-import ThemeToggle from './ThemeToggle.astro';
 import { NAV_LINKS } from '../../consts';
 
 const { currentPath = '/' } = Astro.props;
@@ -27,7 +26,5 @@ const { currentPath = '/' } = Astro.props;
         );
       })}
     </nav>
-
-    <ThemeToggle />
   </Container>
 </header>

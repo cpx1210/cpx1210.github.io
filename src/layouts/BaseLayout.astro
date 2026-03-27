@@ -41,11 +41,6 @@ const canonical = new URL(canonicalPath, Astro.site ?? SITE.url).toString();
     <meta property="og:site_name" content={SITE.title} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#07111f" />
-    <script is:inline>
-      const savedTheme = localStorage.getItem('theme');
-      const preferredLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-      document.documentElement.dataset.theme = savedTheme ?? (preferredLight ? 'light' : 'dark');
-    </script>
   </head>
   <body>
     <div class="site-background" aria-hidden="true">
