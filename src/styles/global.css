@@ -37,6 +37,10 @@ main {
   margin: 0 auto;
 }
 
+.container.home-shell {
+  width: min(1440px, calc(100% - 2.5rem));
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -558,6 +562,21 @@ main {
   border-top: 1px solid var(--border);
 }
 
+
+@media (min-width: 1200px) {
+  .home-content-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr) minmax(320px, 1fr);
+    gap: 1.5rem;
+  }
+
+  .home-content-grid__main {
+    grid-column: 2;
+  }
+
+  .home-content-grid > .sidebar-card {
+    grid-column: 3;
+  }
+}
 @media (max-width: 960px) {
   .home-content-grid,
   .post-layout,
@@ -625,3 +644,5 @@ main {
     align-items: start;
   }
 }
+
+
