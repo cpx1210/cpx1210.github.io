@@ -38,7 +38,7 @@ main {
 }
 
 .container.home-shell {
-  width: min(1560px, calc(100% - 3rem));
+  width: min(1400px, calc(100% - 3rem));
 }
 
 .site-header {
@@ -179,103 +179,23 @@ main {
 .post-meta__grid,
 .post-list-item,
 .home-content-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.page-hero,
-.post-hero,
-.content-panel,
-.search-panel,
-.section-block,
-.archive-group,
-.contest-group {
-  margin-bottom: 2rem;
-}
-
-.page-hero__eyebrow,
-.section-heading__eyebrow,
-.prev-next-nav__eyebrow,
-.post-meta__label,
-.terminal-card__title {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-}
-
-.brand-hero h1,
-.page-hero h1,
-.post-hero h1 {
-  font-size: clamp(2.4rem, 5vw, 4.6rem);
-  line-height: 1.06;
-  letter-spacing: -0.04em;
-  margin: 0.5rem 0 1rem;
-}
-
-.page-hero p,
-.post-hero p {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  max-width: 66ch;
-}
-
-.brand-hero {
-  justify-items: center;
-  text-align: center;
-  padding: 4rem 1.5rem 3rem;
-  margin-bottom: 2rem;
-  border-radius: 32px;
-  background:
-    radial-gradient(circle at top, rgba(125, 198, 255, 0.18), transparent 42%),
-    linear-gradient(180deg, rgba(11, 23, 41, 0.86) 0%, rgba(8, 16, 30, 0.72) 100%);
-}
-
-.brand-hero__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-}
-
-.brand-hero__eyebrow::before,
-.brand-hero__eyebrow::after {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: var(--border);
-}
-
-.brand-hero h1 {
-  margin: 0.8rem 0 0;
-  font-size: clamp(3.4rem, 10vw, 7.2rem);
-  letter-spacing: -0.08em;
-}
-
-.brand-hero__line {
-  width: min(420px, 62vw);
-  height: 1px;
-  margin: 0.5rem 0 1rem;
-  background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
-}
-
-.home-content-grid {
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0, 2.4fr) minmax(320px, 340px);
   align-items: start;
-  column-gap: 2rem;
+  column-gap: 2.5rem;
 }
 
 .home-content-grid__main {
   min-width: 0;
   width: 100%;
-  max-width: 780px;
+  max-width: 920px;
+  justify-self: center;
+}
+
+.home-content-grid__aside {
+  width: 100%;
+  max-width: 340px;
   justify-self: end;
+  align-self: start;
 }
 
 .sidebar-card,
@@ -413,6 +333,50 @@ main {
 .post-list-item__title {
   margin: 0;
   font-size: 1.3rem;
+}
+
+.post-list--home {
+  gap: 1.25rem;
+}
+
+.post-list--home .post-list-item {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+  padding: 1.8rem 1.75rem 1.55rem;
+}
+
+.post-list--home .post-list-item__main {
+  width: 100%;
+  max-width: 42rem;
+  display: grid;
+  gap: 0.9rem;
+  justify-items: center;
+}
+
+.post-list--home .post-list-item__topline,
+.post-list--home .post-list-item__tags,
+.post-list--home .post-list-item__meta {
+  justify-content: center;
+}
+
+.post-list--home .post-list-item__meta {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.post-list--home .post-list-item__title {
+  font-size: clamp(1.7rem, 2.2vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.post-list--home .post-list-item__description {
+  max-width: 42rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .stat-card strong {
@@ -565,27 +529,7 @@ main {
 .site-footer {
   border-top: 1px solid var(--border);
 }
-
-
-@media (min-width: 1200px) {
-  .home-content-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(680px, 780px) 320px;
-    column-gap: 2rem;
-  }
-
-  .home-content-grid__main {
-    grid-column: 2;
-    max-width: none;
-    justify-self: stretch;
-  }
-
-  .home-content-grid > .sidebar-card {
-    grid-column: 3;
-    width: 100%;
-    max-width: 320px;
-    justify-self: end;
-  }
-}@media (max-width: 960px) {
+@media (max-width: 960px) {
   .home-content-grid,
   .post-layout,
   .stats-grid,
@@ -604,6 +548,12 @@ main {
   .post-layout,
   .post-list-item {
     grid-template-columns: 1fr;
+  }
+
+  .home-content-grid__main,
+  .home-content-grid__aside {
+    max-width: none;
+    justify-self: stretch;
   }
 
   .post-toc,

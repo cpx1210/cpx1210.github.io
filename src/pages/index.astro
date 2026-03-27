@@ -11,13 +11,13 @@ const latestPosts = await getLatestPosts(6);
 <BaseLayout>
   <Container class="home-shell">
     <section class="home-content-grid section-block">
-      <div class="home-content-grid__main">
+      <main class="home-content-grid__main">
         <div class="section-heading">
           <span class="section-heading__eyebrow">Latest</span>
           <h2>Recent writing</h2>
         </div>
         {latestPosts.length > 0 ? (
-          <div class="post-list">
+          <div class="post-list post-list--home">
             {latestPosts.map((post) => <PostListItem post={post} />)}
           </div>
         ) : (
@@ -25,9 +25,11 @@ const latestPosts = await getLatestPosts(6);
             <p class="empty-state">还没有公开文章。后续把 `.md` 或 `.mdx` 放进 `src/content/notes` 或 `src/content/contests` 就会自动出现在这里。</p>
           </div>
         )}
-      </div>
+      </main>
 
-      <CtfCalendar />
+      <div class="home-content-grid__aside">
+        <CtfCalendar />
+      </div>
     </section>
   </Container>
 </BaseLayout>
