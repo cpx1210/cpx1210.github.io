@@ -47,6 +47,13 @@ main {
 }
 
 .site-header__inner,
+.site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+}
 
 .site-brand,
 .site-nav,
@@ -318,7 +325,6 @@ main {
   color: var(--text-secondary);
 }
 
-
 .ctf-calendar__list,
 .post-list,
 .stack,
@@ -552,7 +558,6 @@ main {
   border-top: 1px solid var(--border);
 }
 
-
 @media (max-width: 960px) {
   .home-content-grid,
   .post-layout,
@@ -564,7 +569,11 @@ main {
   }
 
   .site-header__inner,
-  
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: start;
+  }
+
   .post-layout,
   .post-list-item {
     grid-template-columns: 1fr;
@@ -616,4 +625,3 @@ main {
     align-items: start;
   }
 }
-
