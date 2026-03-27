@@ -2,51 +2,14 @@
 import Container from '../components/layout/Container.astro';
 import PostListItem from '../components/post/PostListItem.astro';
 import CtfCalendar from '../components/sidebar/CtfCalendar.astro';
-import { getLatestPosts, getPublishedEntries } from '../lib/content';
+import { getLatestPosts } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const [latestPosts, notes, writeups] = await Promise.all([
-  getLatestPosts(6),
-  getPublishedEntries('notes'),
-  getPublishedEntries('contests'),
-]);
-
-const sections = [
-  {
-    href: '/blog/',
-    label: 'Blog',
-    count: latestPosts.length,
-    description: 'All published posts in one clean stream.',
-  },
-  {
-    href: '/notes/',
-    label: 'Notes',
-    count: notes.length,
-    description: 'Learning records, tooling notes, and long-form writeups.',
-  },
-  {
-    href: '/contests/',
-    label: 'Writeup',
-    count: writeups.length,
-    description: 'Competition reviews and challenge-level solutions.',
-  },
-];
+const latestPosts = await getLatestPosts(6);
 ---
 
 <BaseLayout>
   <Container class="home-shell">
-    <section class="section-block">
-      <div class="category-grid">
-        {sections.map((section) => (
-          <a class="category-panel" href={section.href}>
-            <strong>{section.label}</strong>
-            <p>{section.description}</p>
-            <span class="meta-pill">{section.count} posts</span>
-          </a>
-        ))}
-      </div>
-    </section>
-
     <section class="home-content-grid section-block">
       <div class="home-content-grid__main">
         <div class="section-heading">
