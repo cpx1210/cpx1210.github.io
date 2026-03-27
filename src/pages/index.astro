@@ -1,6 +1,7 @@
 ---
 import Container from '../components/layout/Container.astro';
 import PostListItem from '../components/post/PostListItem.astro';
+import CtfCalendar from '../components/sidebar/CtfCalendar.astro';
 import { getLatestPosts, getPublishedEntries } from '../lib/content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -52,20 +53,24 @@ const sections = [
       </div>
     </section>
 
-    <section class="section-block">
-      <div class="section-heading">
-        <span class="section-heading__eyebrow">Latest</span>
-        <h2>Recent writing</h2>
+    <section class="home-content-grid section-block">
+      <div class="home-content-grid__main">
+        <div class="section-heading">
+          <span class="section-heading__eyebrow">Latest</span>
+          <h2>Recent writing</h2>
+        </div>
+        {latestPosts.length > 0 ? (
+          <div class="post-list">
+            {latestPosts.map((post) => <PostListItem post={post} />)}
+          </div>
+        ) : (
+          <div class="empty-panel">
+            <p class="empty-state">还没有公开文章。后续把 `.md` 或 `.mdx` 放进 `src/content/notes` 或 `src/content/contests` 就会自动出现在这里。</p>
+          </div>
+        )}
       </div>
-      {latestPosts.length > 0 ? (
-        <div class="post-list">
-          {latestPosts.map((post) => <PostListItem post={post} />)}
-        </div>
-      ) : (
-        <div class="empty-panel">
-          <p class="empty-state">还没有公开文章。后续把 `.md` 或 `.mdx` 放进 `src/content/notes` 或 `src/content/contests` 就会自动出现在这里。</p>
-        </div>
-      )}
+
+      <CtfCalendar />
     </section>
   </Container>
 </BaseLayout>

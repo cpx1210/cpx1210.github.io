@@ -1,0 +1,69 @@
+---
+import { CTF_EVENTS_EDIT_URL, CTF_EVENTS_FILE_PATH, ctfEvents, type CtfEvent } from '../../data/ctf-events';
+
+function formatEventDate(date: string) {
+  return new Intl.DateTimeFormat('zh-CN', {
+    month: 'short',
+    day: 'numeric',
+    weekday: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(date));
+}
+
+function getEventStatus(event: CtfEvent) {
+  const now = Date.now();
+  const start = new Date(event.startDate).getTime();
+  const end = new Date(event.endDate ?? event.startDate).getTime();
+
+  if (start > now) return 'Upcoming';
+  if (end >= now) return 'Running';
+  return 'Past';
+}
+
+const sortedEvents = [...ctfEvents].sort(
+  (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
+);
+---
+
+<aside class="sidebar-card ctf-calendar" aria-labelledby="ctf-calendar-title">
+  <div class="sidebar-card__header">
+    <div>
+      <span class="section-heading__eyebrow">Calendar</span>
+      <h2 id="ctf-calendar-title">CTF schedule</h2>
+    </div>
+    <a class="button sidebar-card__button" href={CTF_EVENTS_EDIT_URL} target="_blank" rel="noreferrer">
+      Add Event
+    </a>
+  </div>
+
+  <p class="sidebar-card__hint">
+    Click <code>Add Event</code> to edit <code>{CTF_EVENTS_FILE_PATH}</code> on GitHub.
+  </p>
+
+  {sortedEvents.length > 0 ? (
+    <div class="ctf-calendar__list">
+      {sortedEvents.map((event) => (
+        <article class="ctf-calendar__item">
+          <div class="ctf-calendar__topline">
+            <span class="meta-pill">{getEventStatus(event)}</span>
+            {event.platform && <span class="ctf-calendar__platform">{event.platform}</span>}
+          </div>
+          <strong class="ctf-calendar__title">{event.title}</strong>
+          <p class="ctf-calendar__date">{formatEventDate(event.startDate)}</p>
+          {event.endDate && <p class="ctf-calendar__date">to {formatEventDate(event.endDate)}</p>}
+          {event.note && <p class="ctf-calendar__note">{event.note}</p>}
+          {event.url && (
+            <a class="ctf-calendar__link" href={event.url} target="_blank" rel="noreferrer">
+              Open event
+            </a>
+          )}
+        </article>
+      ))}
+    </div>
+  ) : (
+    <div class="empty-panel">
+      <p class="empty-state">还没有记录比赛时间。点击右上角的 <code>Add Event</code> 就能在 GitHub 上直接维护。</p>
+    </div>
+  )}
+</aside>

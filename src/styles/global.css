@@ -64,7 +64,9 @@ main {
 .hero-actions,
 .post-list-item__topline,
 .post-list-item__tags,
-.post-list-item__meta {
+.post-list-item__meta,
+.sidebar-card__header,
+.ctf-calendar__topline {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -100,7 +102,8 @@ main {
 .event-card:hover,
 .post-card:hover,
 .search-result-card:hover,
-.post-list-item:hover {
+.post-list-item:hover,
+.ctf-calendar__item:hover {
   background: var(--surface-soft);
   color: var(--text-primary);
 }
@@ -123,7 +126,9 @@ main {
 .prev-next-nav__card,
 .post-list-item,
 .empty-panel,
-.brand-hero {
+.brand-hero,
+.sidebar-card,
+.ctf-calendar__item {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow-soft);
@@ -168,7 +173,8 @@ main {
 .prev-next-nav,
 .search-result-card a,
 .post-meta__grid,
-.post-list-item {
+.post-list-item,
+.home-content-grid {
   display: grid;
   gap: 1rem;
 }
@@ -255,6 +261,17 @@ main {
   background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
 }
 
+.home-content-grid {
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+}
+
+.home-content-grid__main {
+  min-width: 0;
+}
+
+.sidebar-card,
+.ctf-calendar__item,
 .terminal-card,
 .stat-card,
 .event-card,
@@ -275,29 +292,94 @@ main {
   border-radius: 24px;
 }
 
-.terminal-card {
-  padding: 1.2rem;
-  overflow: hidden;
+.sidebar-card {
+  position: sticky;
+  top: 6rem;
+  padding: 1.15rem;
 }
 
-.terminal-card pre {
-  margin: 0.75rem 0 0;
+.sidebar-card__header {
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-card__header h2 {
+  margin: 0.25rem 0 0;
+  font-size: 1.35rem;
+}
+
+.sidebar-card__button {
+  padding-inline: 0.9rem;
+}
+
+.sidebar-card__hint,
+.ctf-calendar__date,
+.ctf-calendar__note,
+.ctf-calendar__platform,
+.post-list-item__description,
+.post-card__description,
+.contest-link span,
+.event-card p,
+.search-hint,
+.page-intro {
   color: var(--text-secondary);
-  font-family: var(--font-mono);
 }
 
-.stats-grid,
-.category-grid,
-.event-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.sidebar-card__hint {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
 }
 
+.ctf-calendar__list,
 .post-list,
 .stack,
 .archive-list,
 .contest-group__items {
   display: grid;
   gap: 1rem;
+}
+
+.ctf-calendar__item {
+  padding: 0.95rem 1rem;
+  transition: 180ms ease;
+}
+
+.ctf-calendar__title {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 1rem;
+}
+
+.ctf-calendar__topline {
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.ctf-calendar__date,
+.ctf-calendar__note {
+  margin: 0.2rem 0;
+  font-size: 0.92rem;
+}
+
+.ctf-calendar__platform {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ctf-calendar__link {
+  display: inline-flex;
+  margin-top: 0.5rem;
+  color: var(--accent);
+}
+
+.stats-grid,
+.category-grid,
+.event-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .stat-card,
@@ -329,15 +411,6 @@ main {
 .post-list-item__title {
   margin: 0;
   font-size: 1.3rem;
-}
-
-.post-list-item__description,
-.post-card__description,
-.contest-link span,
-.event-card p,
-.search-hint,
-.page-intro {
-  color: var(--text-secondary);
 }
 
 .stat-card strong {
@@ -497,12 +570,13 @@ main {
 }
 
 @media (max-width: 960px) {
+  .home-content-grid,
   .post-layout,
   .stats-grid,
   .category-grid,
   .event-grid,
   .post-meta__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .site-header__inner,
@@ -516,7 +590,8 @@ main {
     grid-template-columns: 1fr;
   }
 
-  .post-toc {
+  .post-toc,
+  .sidebar-card {
     position: static;
     order: -1;
   }
@@ -554,5 +629,10 @@ main {
 
   .brand-hero {
     padding: 3rem 1rem 2.5rem;
+  }
+
+  .sidebar-card__header {
+    flex-direction: column;
+    align-items: start;
   }
 }
