@@ -30,7 +30,7 @@ body {
   height: 100%;
   object-fit: cover;
   transform: scale(1.03);
-  filter: saturate(0.72) brightness(0.34);
+  filter: saturate(0.82) brightness(0.58);
 }
 
 .site-background__veil,
@@ -41,14 +41,14 @@ body {
 
 .site-background__veil {
   background:
-    linear-gradient(180deg, rgba(5, 11, 22, 0.5) 0%, rgba(5, 11, 22, 0.76) 36%, rgba(5, 11, 22, 0.88) 100%),
-    radial-gradient(circle at top, rgba(93, 166, 255, 0.12), transparent 30%);
+    linear-gradient(180deg, rgba(5, 11, 22, 0.14) 0%, rgba(5, 11, 22, 0.24) 38%, rgba(5, 11, 22, 0.38) 100%),
+    radial-gradient(circle at top, rgba(93, 166, 255, 0.1), transparent 34%);
 }
 
 .site-background__glow {
   background:
-    radial-gradient(circle at 20% 18%, rgba(120, 190, 255, 0.1), transparent 26%),
-    radial-gradient(circle at 78% 14%, rgba(79, 133, 214, 0.08), transparent 20%);
+    radial-gradient(circle at 20% 18%, rgba(120, 190, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 78% 14%, rgba(79, 133, 214, 0.1), transparent 24%);
 }
 
 .site-shell {
@@ -717,5 +717,6 @@ main {
     align-items: start;
   }
 }
+
 
 
