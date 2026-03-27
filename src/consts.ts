@@ -7,13 +7,9 @@ export const SITE = {
 };
 
 export const NAV_LINKS = [
-  { href: '/', label: 'Home' },
   { href: '/blog/', label: 'Blog' },
   { href: '/notes/', label: 'Notes' },
-  { href: '/contests/', label: 'Contests' },
-  { href: '/archive/', label: 'Archive' },
-  { href: '/about/', label: 'About' },
-  { href: '/search/', label: 'Search' },
+  { href: '/contests/', label: 'Writeup' },
 ];
 
 export const NOTE_CATEGORY_META = {

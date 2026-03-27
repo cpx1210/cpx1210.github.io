@@ -7,8 +7,8 @@ const groups = await getContestGroups();
 ---
 
 <PageLayout
-  title="Contests"
-  description="Competition retrospectives, single-challenge writeups, rank notes, and team-oriented review logs."
+  title="Writeup"
+  description="Competition reviews and challenge writeups collected in one simple section."
 >
   {groups.length > 0 ? (
     <div class="stack">
@@ -37,7 +37,7 @@ const groups = await getContestGroups();
     </div>
   ) : (
     <div class="empty-panel">
-      <p class="empty-state">比赛复盘区还没有内容。以后把赛事总结或单题 writeup 放进 `src/content/contests/` 即可。</p>
+      <p class="empty-state">Writeup 区还没有内容。以后把赛事总结或单题 writeup 放进 `src/content/contests/` 即可。</p>
     </div>
   )}
 </PageLayout>

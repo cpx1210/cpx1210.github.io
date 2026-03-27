@@ -2,7 +2,6 @@
 import type { AnyEntry } from '../../lib/content';
 import { CHALLENGE_TYPE_META } from '../../consts';
 import { formatDate } from '../../lib/utils';
-import CategoryBadge from '../ui/CategoryBadge.astro';
 import TagChip from '../ui/TagChip.astro';
 
 interface Props {
@@ -25,8 +24,8 @@ const isContest = entry.collection === 'contests';
       <strong>{entry.data.updatedDate ? formatDate(entry.data.updatedDate) : 'N/A'}</strong>
     </div>
     <div>
-      <span class="post-meta__label">Category</span>
-      <CategoryBadge category={entry.data.category} />
+      <span class="post-meta__label">Type</span>
+      <strong>{isContest ? 'Writeup' : 'Notes'}</strong>
     </div>
     <div>
       <span class="post-meta__label">Read</span>

@@ -1,6 +1,5 @@
 ---
 import PostListItem from '../../components/post/PostListItem.astro';
-import { NOTE_CATEGORY_META } from '../../consts';
 import { getPublishedEntries, toPostSummary } from '../../lib/content';
 import PageLayout from '../../layouts/PageLayout.astro';
 
@@ -9,26 +8,15 @@ const notes = (await getPublishedEntries('notes')).map((entry) => toPostSummary(
 
 <PageLayout
   title="Notes"
-  description="Long-term study notes for web, pwn, crypto, reverse, forensics, tools, and everything in between."
+  description="All note posts in a single stream, without extra direction-level grouping."
 >
-  <section class="category-grid category-grid--dense">
-    {Object.entries(NOTE_CATEGORY_META).map(([slug, meta]) => (
-      <a class="category-panel" href={`/categories/${slug}/`}>
-        <strong>{meta.label}</strong>
-        <p>{meta.description}</p>
-      </a>
-    ))}
-  </section>
-
-  <section class="section-block">
-    {notes.length > 0 ? (
-      <div class="post-list">
-        {notes.map((post) => <PostListItem post={post} />)}
-      </div>
-    ) : (
-      <div class="empty-panel">
-        <p class="empty-state">笔记区目前没有文章。后续新增到 `src/content/notes/` 的内容会自动出现在这里。</p>
-      </div>
-    )}
-  </section>
+  {notes.length > 0 ? (
+    <div class="post-list">
+      {notes.map((post) => <PostListItem post={post} />)}
+    </div>
+  ) : (
+    <div class="empty-panel">
+      <p class="empty-state">笔记区目前没有文章。后续新增到 `src/content/notes/` 的内容会自动出现在这里。</p>
+    </div>
+  )}
 </PageLayout>

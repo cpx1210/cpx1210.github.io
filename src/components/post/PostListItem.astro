@@ -1,7 +1,6 @@
 ---
 import type { PostSummary } from '../../lib/content';
 import { formatDate } from '../../lib/utils';
-import CategoryBadge from '../ui/CategoryBadge.astro';
 import SectionBadge from '../ui/SectionBadge.astro';
 import TagChip from '../ui/TagChip.astro';
 
@@ -16,7 +15,6 @@ const { post } = Astro.props as Props;
   <div class="post-list-item__main">
     <div class="post-list-item__topline">
       <SectionBadge section={post.section} />
-      <CategoryBadge category={post.category} />
       {post.difficulty && <span class="meta-pill">{post.difficulty}</span>}
     </div>
 
@@ -33,6 +31,6 @@ const { post } = Astro.props as Props;
 
   <div class="post-list-item__meta">
     <span>{formatDate(post.pubDate)}</span>
-    <span>{post.section === 'contests' ? 'Contest' : 'Notes'}</span>
+    <span>{post.section === 'contests' ? 'Writeup' : 'Notes'}</span>
   </div>
 </article>
